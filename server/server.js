@@ -21,9 +21,10 @@ app.use(express.static(publicPath));
 	socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 	
 	//listen
-	socket.on('createMessage', (message) => {
+	socket.on('createMessage', (message, callback) => {
 	console.log('createMessage', message);
 	io.emit('newMessage', generateMessage(message.from,message.text));
+	callback('This is from the server.');
 	//make event to all connection
 	//io.emit('newMessage', {
 	//from: message.from,
