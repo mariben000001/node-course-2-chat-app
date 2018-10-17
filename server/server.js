@@ -15,16 +15,22 @@ app.use(express.static(publicPath));
 	io.on('connection', (socket) => {
 	console.log('New user connected');
 	
-	//makeevent 
-	socket.emit('newMessage', {
-	from: 'Angeline!!!',
-	text: 'Meet me at 6pm @ 7-11',
-	createdAt: 123
-	});
+	//makeevent to single connection
+	//socket.emit('newMessage', {
+	//from: 'Angeline!!!',
+	//text: 'Meet me at 6pm @ 7-11',
+	//createdAt: 123
+	//});
 	
 	//listen
 	socket.on('createMessage', (message) => {
 	console.log('createMessage', message);
+	//make event to all connection
+	io.emit('newMessage', {
+	from: message.from,
+	text: message.text,
+	createdAt: new Date().getTime()
+	});
 	});
 	
 	socket.on('disconnect', () => {
