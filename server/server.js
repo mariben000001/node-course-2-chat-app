@@ -24,7 +24,7 @@ app.use(express.static(publicPath));
 	socket.on('createMessage', (message, callback) => {
 	console.log('createMessage', message);
 	io.emit('newMessage', generateMessage(message.from,message.text));
-	callback('This is from the server.');
+	callback();
 	});
 	//make event to all connection
 	//io.emit('newMessage', {
